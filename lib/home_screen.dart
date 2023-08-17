@@ -29,15 +29,17 @@ class ProfileBranchData extends StatefulShellBranchData {
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<HomeScreenRoute>(path: '/', routes: [
           TypedGoRoute<HomeDetailsRouteData>(
-            path: 'details/:id',
-          )
+              path: 'details/:id',
+              ),
         ]),
       ],
     ),
     TypedStatefulShellBranch<ProfileBranchData>(
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<ProfileScreenRoute>(path: '/profile', routes: [
-          TypedGoRoute<ProfileDetailsRouteData>(path: 'details/:id'),
+          TypedGoRoute<ProfileDetailsRouteData>(
+              path: 'details/:id',
+              ),
         ]),
       ],
     ),
@@ -109,7 +111,7 @@ class ScaffoldWithNavBar extends ConsumerWidget {
     // When navigating to a new branch, it's recommended to use the goBranch
     // method, as doing so makes sure the last navigation state of the
     // Navigator for the branch is restored.
-    if(index == 0) {
+    if (index == 0) {
       ref.read(homeDataProvider.notifier).refresh();
     }
     navigationShell.goBranch(
@@ -194,12 +196,10 @@ class HomeScreen extends StatelessWidget {
                   loading: () => const CircularProgressIndicator.adaptive());
             }),
             const SizedBox(height: 20),
-            Consumer(builder: (context, ref, child) {
-              return ElevatedButton(
-                onPressed: () => const HomeDetailsRouteData(1).go(context),
-                child: const Text('Go to Details Screen'),
-              );
-            }),
+            ElevatedButton(
+              onPressed: () => const HomeDetailsRouteData(1).go(context),
+              child: const Text('Go to Details Screen'),
+            ),
           ],
         ),
       ),
