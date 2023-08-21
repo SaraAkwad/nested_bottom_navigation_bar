@@ -29,8 +29,8 @@ class ProfileBranchData extends StatefulShellBranchData {
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<HomeScreenRoute>(path: '/', routes: [
           TypedGoRoute<HomeDetailsRouteData>(
-              path: 'details/:id',
-              ),
+            path: 'details/:id',
+          ),
         ]),
       ],
     ),
@@ -38,8 +38,8 @@ class ProfileBranchData extends StatefulShellBranchData {
       routes: <TypedRoute<RouteData>>[
         TypedGoRoute<ProfileScreenRoute>(path: '/profile', routes: [
           TypedGoRoute<ProfileDetailsRouteData>(
-              path: 'details/:id',
-              ),
+            path: 'details/:id',
+          ),
         ]),
       ],
     ),
@@ -112,7 +112,7 @@ class ScaffoldWithNavBar extends ConsumerWidget {
     // method, as doing so makes sure the last navigation state of the
     // Navigator for the branch is restored.
     if (index == 0) {
-      ref.read(homeDataProvider.notifier).refresh();
+      ref.invalidate(homeDataProvider);
     }
     navigationShell.goBranch(
       index,
@@ -191,6 +191,7 @@ class HomeScreen extends StatelessWidget {
             Consumer(builder: (context, ref, child) {
               final state = ref.watch(homeDataProvider);
               return state.when(
+                skipLoadingOnRefresh: false,
                   data: (data) => Text(data),
                   error: (error, st) => Text(error.toString()),
                   loading: () => const CircularProgressIndicator.adaptive());

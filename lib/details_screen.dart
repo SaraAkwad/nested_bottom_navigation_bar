@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:nested_bottom_navigation_bar/app_router.dart';
 import 'package:nested_bottom_navigation_bar/details_controller.dart';
 import 'package:nested_bottom_navigation_bar/foo_screen.dart';
-import 'package:nested_bottom_navigation_bar/home_screen.dart';
 
 class HomeDetailsRouteData extends GoRouteData {
   const HomeDetailsRouteData(this.id);
